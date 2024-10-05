@@ -2,7 +2,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class lab_01 {
-    Scanner in = new Scanner(System.in);
+    final Scanner in = new Scanner(System.in);
 
     int task_1() {
 

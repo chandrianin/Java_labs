@@ -1,7 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        lab_01();
+        lab_02();
     }
+
     static void lab_01() {
         lab_01 tasks = new lab_01();
 
@@ -16,5 +17,27 @@ public class Main {
         System.out.println(tasks.task_5());
 
         tasks.in.close();
+    }
+
+    static void lab_02() {
+        lab_02 tasks = new lab_02();
+
+        System.out.println(tasks.task_1());
+
+        System.out.println(tasks.task_2());
+
+        System.out.println(tasks.task_3());
+
+        System.out.println(tasks.task_4());
+
+        System.out.println(tasks.task_5());
+
+        System.out.println(tasks.task_6());
+
+        System.out.println(tasks.task_7());
+
+        System.out.println(tasks.task_8());
+
+        tasks._in.close();
     }
 }
