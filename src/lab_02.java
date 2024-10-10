@@ -6,10 +6,59 @@ import static java.lang.Character.toLowerCase;
 public class lab_02 {
     final Scanner _in = new Scanner(System.in);
 
-    public String task_1() {
-        StringBuilder result = new StringBuilder();
+    public String stringInput() {
         System.out.print("Введите строку:\n");
-        String inputLine = _in.nextLine();
+        return _in.nextLine();
+    }
+
+    public int intInput() {
+        System.out.print("Введите число: ");
+        if (_in.hasNextInt()) {
+            return _in.nextInt();
+        }
+        throw new RuntimeException("Необходимо ввести числовое значение");
+    }
+
+    public int[] intArrayInput() {
+        int[] inputArray;
+        System.out.print("Введите количество чисел массива: ");
+        int n_1 = _in.nextInt();
+        inputArray = new int[n_1];
+        System.out.print("Введите элементы массива: ");
+        for (int i = 0; i < n_1; i++) {
+            if (_in.hasNextInt()) {
+                inputArray[i] = _in.nextInt();
+            }
+        }
+        return inputArray;
+    }
+
+    public int[][] twoDimensionalIntArrayInput() {
+        int[][] target;
+        System.out.print("Введите количество строк: ");
+        int rows = _in.nextInt();
+        if (rows < 1) {
+            throw new RuntimeException("В массиве должна быть хотя бы одна строка");
+        }
+        System.out.print("Введите количество столбцов: ");
+        int columns = _in.nextInt();
+        if (columns < 1) {
+            throw new RuntimeException("В массиве должен быть хотя бы один столбец");
+        }
+        target = new int[rows][columns];
+        for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
+            System.out.print((rowIndex + 1) + ": ");
+            for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
+                if (_in.hasNextInt()) {
+                    target[rowIndex][columnIndex] = _in.nextInt();
+                }
+            }
+        }
+        return target;
+    }
+
+    public String task_1(String inputLine) {
+        StringBuilder result = new StringBuilder();
         char[] maxSubLine = new char[inputLine.length()];
         char[] currentSubLine = new char[inputLine.length()];
         int currentSubLineIndex = 0;
@@ -43,29 +92,9 @@ public class lab_02 {
         return result.toString();
     }
 
-    public String task_2() {
-        int[] firstArray;
-        System.out.print("Введите количество чисел в первом массиве:\n");
-        int n_1 = _in.nextInt();
-        firstArray = new int[n_1];
-        System.out.print("Введите числа массива:\n");
-        for (int i = 0; i < n_1; i++) {
-            if (_in.hasNextInt()) {
-                firstArray[i] = _in.nextInt();
-            }
-        }
-
-        int[] secondArray;
-        System.out.print("Введите количество чисел во втором массиве:\n");
-        int n_2 = _in.nextInt();
-        secondArray = new int[n_2];
-        System.out.print("Введите числа массива:\n");
-        for (int i = 0; i < n_2; i++) {
-            if (_in.hasNextInt()) {
-                secondArray[i] = _in.nextInt();
-            }
-        }
-
+    public String task_2(int[] firstArray, int[] secondArray) {
+        int n_1 = firstArray.length;
+        int n_2 = secondArray.length;
         int[] resultArray = new int[n_1 + n_2];
         for (int i = 0; i < n_1; i++) {
             resultArray[i] = firstArray[i];
@@ -81,19 +110,9 @@ public class lab_02 {
         return result.toString();
     }
 
-    public String task_3() {
-        int[] numbers;
-        System.out.print("Введите количество чисел в массиве:\n");
-        int n_1 = _in.nextInt();
-        if (n_1 == 0) {
+    public String task_3(int[] numbers) {
+        if (numbers.length == 0) {
             return "0";
-        }
-        numbers = new int[n_1];
-        System.out.print("Введите числа массива:\n");
-        for (int i = 0; i < n_1; i++) {
-            if (_in.hasNextInt()) {
-                numbers[i] = _in.nextInt();
-            }
         }
         int smallMax = 0;
         int bigMax = 0;
@@ -104,22 +123,10 @@ public class lab_02 {
         return Integer.toString(bigMax);
     }
 
-    public String task_4() {
-        int[][] target;
-        System.out.print("Введите количество строк: ");
-        int rows = _in.nextInt();
-        System.out.print("Введите количество столбцов: ");
-        int columns = _in.nextInt();
-        target = new int[rows][columns];
+    public String task_4(int[][] target) {
+        int columns = target.length;
+        int rows = target[0].length;
         int[][] resultArray = new int[columns][rows];
-        for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-            System.out.print((rowIndex + 1) + ": ");
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
-                if (_in.hasNextInt()) {
-                    target[rowIndex][columnIndex] = _in.nextInt();
-                }
-            }
-        }
         StringBuilder result = new StringBuilder();
         for (int rowIndex = target.length - 1; rowIndex >= 0; rowIndex--) {
             for (int columnIndex = target[rowIndex].length - 1; columnIndex >= 0; columnIndex--) {
@@ -135,19 +142,8 @@ public class lab_02 {
         return result.toString();
     }
 
-    public String task_5() {
-        System.out.print("Введите target: ");
-        int target = _in.nextInt();
-        int[] numbers;
-        System.out.print("Введите количество чисел в массиве: ");
-        int n_1 = _in.nextInt();
-        numbers = new int[n_1];
-        System.out.print("Введите числа массива: ");
-        for (int i = 0; i < n_1; i++) {
-            if (_in.hasNextInt()) {
-                numbers[i] = _in.nextInt();
-            }
-        }
+    public String task_5(int[] numbers, int target) {
+        int n_1 = numbers.length;
         for (int i = 0; i < n_1 - 1; i++) {
             for (int j = i + 1; j < n_1; j++) {
                 if (numbers[i] + numbers[j] == target) {
@@ -158,21 +154,9 @@ public class lab_02 {
         return null;
     }
 
-    public String task_6() {
-        int[][] target;
-        System.out.print("Введите количество строк: ");
-        int rows = _in.nextInt();
-        System.out.print("Введите количество столбцов: ");
-        int columns = _in.nextInt();
-        target = new int[rows][columns];
-        for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-            System.out.print((rowIndex + 1) + ": ");
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
-                if (_in.hasNextInt()) {
-                    target[rowIndex][columnIndex] = _in.nextInt();
-                }
-            }
-        }
+    public String task_6(int[][] target) {
+        int columns = target.length;
+        int rows = target[0].length;
         int sum = 0;
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
             for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
@@ -182,22 +166,10 @@ public class lab_02 {
         return Integer.toString(sum);
     }
 
-    public String task_7() {
-        int[][] target;
-        System.out.print("Введите количество строк: ");
-        int rows = _in.nextInt();
-        System.out.print("Введите количество столбцов: ");
-        int columns = _in.nextInt();
-        target = new int[rows][columns];
+    public String task_7(int[][] target) {
+        int columns = target.length;
+        int rows = target[0].length;
         int[] resultArray = new int[rows];
-        for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-            System.out.print((rowIndex + 1) + ": ");
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
-                if (_in.hasNextInt()) {
-                    target[rowIndex][columnIndex] = _in.nextInt();
-                }
-            }
-        }
         for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
             resultArray[rowIndex] = target[rowIndex][0];
             for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
@@ -207,7 +179,6 @@ public class lab_02 {
             }
         }
 
-
         StringBuilder result = new StringBuilder();
         for (int rowMax : resultArray) {
             result.append(rowMax).append(" ");
@@ -215,22 +186,10 @@ public class lab_02 {
         return result.toString();
     }
 
-    public String task_8() {
-        int[][] target;
-        System.out.print("Введите количество строк: ");
-        int rows = _in.nextInt();
-        System.out.print("Введите количество столбцов: ");
-        int columns = _in.nextInt();
-        target = new int[rows][columns];
-        int[][] resultArray = new int[columns][rows];
-        for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-            System.out.print((rowIndex + 1) + ": ");
-            for (int columnIndex = 0; columnIndex < columns; columnIndex++) {
-                if (_in.hasNextInt()) {
-                    target[rowIndex][columnIndex] = _in.nextInt();
-                }
-            }
-        }
+    public String task_8(int[][] target) {
+        int columns = target.length;
+        int rows = target[0].length;
+        int[][] resultArray = new int[rows][columns];
         StringBuilder result = new StringBuilder();
         for (int rowIndex = target.length - 1; rowIndex >= 0; rowIndex--) {
             for (int columnIndex = target[rowIndex].length - 1; columnIndex >= 0; columnIndex--) {
