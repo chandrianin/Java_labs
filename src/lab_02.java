@@ -124,8 +124,11 @@ public class lab_02 {
     }
 
     public String task_4(int[][] target) {
-        int columns = target.length;
-        int rows = target[0].length;
+        if (target.length == 0) {
+            return "";
+        }
+        int columns = target[0].length;
+        int rows = target.length;
         int[][] resultArray = new int[columns][rows];
         StringBuilder result = new StringBuilder();
         for (int rowIndex = target.length - 1; rowIndex >= 0; rowIndex--) {
@@ -187,8 +190,11 @@ public class lab_02 {
     }
 
     public String task_8(int[][] target) {
-        int columns = target.length;
-        int rows = target[0].length;
+        if (target.length == 0) {
+            return "";
+        }
+        int columns = target[0].length;
+        int rows = target.length;
         int[][] resultArray = new int[rows][columns];
         StringBuilder result = new StringBuilder();
         for (int rowIndex = target.length - 1; rowIndex >= 0; rowIndex--) {

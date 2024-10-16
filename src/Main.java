@@ -21,20 +21,20 @@ public class Main {
 
     static void lab_02() {
         lab_02 tasks = new lab_02();
-
-        System.out.println(tasks.task_1(tasks.stringInput()) + '\n');
-
-        System.out.println(tasks.task_2(tasks.intArrayInput(), tasks.intArrayInput())  + '\n');
-
-        System.out.println(tasks.task_3(tasks.intArrayInput())  + '\n');
+        
+//        System.out.println(tasks.task_1(tasks.stringInput()) + '\n');
+//
+//        System.out.println(tasks.task_2(tasks.intArrayInput(), tasks.intArrayInput())  + '\n');
+//
+//        System.out.println(tasks.task_3(tasks.intArrayInput())  + '\n');
 
         System.out.println(tasks.task_4(tasks.twoDimensionalIntArrayInput())  + '\n');
-
-        System.out.println(tasks.task_5(tasks.intArrayInput(), tasks.intInput())  + '\n');
-
-        System.out.println(tasks.task_6(tasks.twoDimensionalIntArrayInput())  + '\n');
-
-        System.out.println(tasks.task_7(tasks.twoDimensionalIntArrayInput())  + '\n');
+//
+//        System.out.println(tasks.task_5(tasks.intArrayInput(), tasks.intInput())  + '\n');
+//
+//        System.out.println(tasks.task_6(tasks.twoDimensionalIntArrayInput())  + '\n');
+//
+//        System.out.println(tasks.task_7(tasks.twoDimensionalIntArrayInput())  + '\n');
 
         System.out.println(tasks.task_8(tasks.twoDimensionalIntArrayInput())  + '\n');
 
