@@ -3,7 +3,7 @@ package lab_03_chess.Figures;
 public class Pawn extends Figure {
     // pawn - пешка
 
-    private boolean isFirstStep = true;
+    public boolean isFirstStep = true;
 
     public Pawn(char color) {
         super("p", color);

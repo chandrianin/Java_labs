@@ -3,6 +3,7 @@ package lab_03_chess;
 import lab_03_chess.Figures.*;
 
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Board {
 
@@ -22,11 +23,11 @@ public class Board {
 
     public void init() {
         this.fields[7] = new Figure[]{
-                new Rook('b'), new Knight('b'), new Bishop('b'), new Queen('b'),
+                new Rook('b'), /*new Knight('b')*/null, new Bishop('b'), new Queen('b'),
                 new King('b'), new Bishop('b'), new Knight('b'), new Rook('b'),
         };
         this.fields[6] = new Figure[]{
-                new Pawn('b'), new Pawn('b'), new Pawn('b'), new Pawn('b'),
+                new Pawn('b'), new Pawn('w'), new Pawn('b'), new Pawn('b'),
                 new Pawn('b'), new Pawn('b'), new Pawn('b'), new Pawn('b')
         };
 
@@ -66,13 +67,13 @@ public class Board {
 
     public boolean move_figure(int row, int col, int row1, int col1) {
         // TODO добавить состояние шаха королю
+        // TODO добавить рокировку
         Figure figure = this.fields[row][col];
         if (figure == null) {
             return false;
         }
         boolean flag = true;
         switch (figure.getName()) { // проверяем, что на пути к новой клетке не стоят другие фигуры
-            //TODO первый ход пешки
             case "r": // rook - ладья
                 if (row == row1) {
                     for (int i = Math.min(col, col1) + 1; i < Math.max(col, col1); i++) {
@@ -140,19 +141,56 @@ public class Board {
                     }
                 }
                 break;
+            case "p":
+                if (((Pawn) figure).isFirstStep &&
+                        (Math.abs(row - row1) == 2) &&
+                        (figure.getColor() == 'b' && fields[row - 1][col] != null ||
+                                figure.getColor() == 'w' && fields[row + 1][col] != null)) {
+                    flag = false;
+                }
         }
-        flag = flag && figure.canMove(row, col, row1, col1);
-        if (flag && this.fields[row1][col1] == null && figure.getColor() == this.colorGame) {
+        if (flag && figure.canMove(row, col, row1, col1) && this.fields[row1][col1] == null && figure.getColor() == this.colorGame) {
             this.fields[row1][col1] = figure;
             this.fields[row][col] = null;
+
+            if (row1 == 7 && figure.getColor() == 'w' || row1 == 0 && figure.getColor() == 'b') {
+                changePawnTo(row1, col1);
+            }
+
             return true;
         } else if (flag && figure.canAttack(row, col, row1, col1) && this.fields[row1][col1] != null &&
                 !Objects.equals(this.fields[row1][col1].getName(), "K") &&
                 this.fields[row1][col1].getColor() != this.fields[row][col].getColor()) {
             this.fields[row1][col1] = figure;
             this.fields[row][col] = null;
+
+            if (row1 == 7 && figure.getColor() == 'w' || row1 == 0 && figure.getColor() == 'b') {
+                changePawnTo(row1, col1);
+            }
+
             return true;
         }
         return false;
+    }
+
+    private void changePawnTo(int row1, int col1) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Пешка дошла до конца. Выберите новую фигуру!");
+        System.out.println(colorGame + "Q" + ", " + colorGame + "r" + ", " + colorGame + "k" + ", " + colorGame + "b");
+        String newFigureLine = in.nextLine().toLowerCase();
+        switch (newFigureLine.charAt(newFigureLine.length() - 1)) {
+            case 'q':
+                fields[row1][col1] = new Queen(colorGame);
+                break;
+            case 'r':
+                fields[row1][col1] = new Rook(colorGame);
+                break;
+            case 'k':
+                fields[row1][col1] = new Knight(colorGame);
+                break;
+            case 'b':
+                fields[row1][col1] = new Bishop(colorGame);
+                break;
+        }
     }
 }

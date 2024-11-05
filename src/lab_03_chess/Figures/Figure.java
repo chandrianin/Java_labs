@@ -20,7 +20,7 @@ public abstract class Figure {
     public boolean canMove(int row, int col, int row1, int col1) {
         return (row >= 0 && row < 8) && (col >= 0 && col < 8) &&
                 (row1 >= 0 && row1 < 8) && (col1 >= 0 && col1 < 8) &&
-                (col != col1) && (row != row1);
+                ((col != col1) || (row != row1));
     }
 
     public boolean canAttack(int row, int col, int row1, int col1) {
