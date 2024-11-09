@@ -11,18 +11,21 @@ public class Main {
 
         System.out.println();
 
-        boolean isGame = true;
+        int gameCode = board.separator;
         Scanner in = new Scanner(System.in);
 
-
-        while (isGame) {
-            // TODO Добавить конец игры
+        while (true) {
             board.print_board();
             System.out.println();
 
-            System.out.println("Управление: ");
-            System.out.println("Ход фигуры из клетки (row, col) в (row1, col1)");
-            System.out.println("> row col row1 col1");
+            if (gameCode == board.mate) {
+                System.out.println(board.textToOut[board.mate]);
+                break;
+            }
+
+//            System.out.println("Управление: ");
+//            System.out.println("Ход фигуры из клетки (row, col) в (row1, col1)");
+//            System.out.println("> row col row1 col1");
 
             switch (board.getColorGame()) {
                 case 'w':
@@ -43,8 +46,10 @@ public class Main {
             row1 = Integer.parseInt(coords[2]);
             col1 = Integer.parseInt(coords[3]);
 
-            while (!board.move_figure(row, col, row1, col1)) {
-                System.out.println("Ошибка! Повторите ход фигуры!");
+
+            gameCode = board.move_figure(row, col, row1, col1);
+            while (gameCode > board.separator) {
+                System.out.println(board.textToOut[gameCode]);
                 switch (board.getColorGame()) {
                     case 'w':
                         System.out.println("Ход белых");
@@ -61,7 +66,9 @@ public class Main {
                 col = Integer.parseInt(coords[1]);
                 row1 = Integer.parseInt(coords[2]);
                 col1 = Integer.parseInt(coords[3]);
+                gameCode = board.move_figure(row, col, row1, col1);
             }
+            System.out.println(board.textToOut[gameCode]);
 
             switch (board.getColorGame()) {
                 case 'w':
