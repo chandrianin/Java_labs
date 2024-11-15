@@ -1,6 +1,7 @@
 package lab_03_chess.Figures;
 
 public class King extends Figure {
+    public boolean isFirstStep = true;
     // King - Король
 
     public King(char color) {

@@ -102,6 +102,16 @@ public class Board {
         }
 
         Figure figure = _fields[row][col];
+//
+//        // Рокировка
+//        if (figure.getName() == "K" && ((King) figure).isFirstStep && row == row1 && Math.abs(col - col1) == 3) {
+//            Figure rightRook = _fields[row][7];
+//            Figure leftRook = _fields[row][0];
+//            if (col < col1 && _fields[row][col + 1] == null && _fields[row][col + 2] == null // рокировка с правой ладьей
+//                    && rightRook != null && rightRook.getName() == "R" && ((Rook) rightRook).isFirstStep) {
+//
+//            }
+//        }
 
         // фигура должна ходить в пустую клетку или атаковать фигуру другого цвета
         boolean flag = !figuresInWay(row, col, row1, col1) && (figure.canMove(row, col, row1, col1) && _fields[row1][col1] == null ||
@@ -127,17 +137,25 @@ public class Board {
             };
 
             if (_checkMate(anotherColor)) { // проверяем не поставлен ли ходом мат
-                switch (_colorGame) {
+                textToOut[mate] = switch (_colorGame) {
                     case 'b':
-                        textToOut[mate] = "Выиграли белые!";
+                        yield "Выиграли чёрные!";
                     case 'w':
-                        textToOut[mate] = "Выиграли чёрные!";
-                }
+                        yield "Выиграли белые!";
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + _colorGame);
+                };
                 return mate; // мат
-            } else if (_checkToKing(anotherColor)) { // проверяем, не поставлен ли ходом шах
+            } else if (_checkToKing(anotherColor)) { // проверяем, не поставлен ли новым ходом шах
                 return separator - 1;
-            } else
+            } else {
+                if (figure.getName() == "K" && ((King) figure).isFirstStep) {
+                    ((King) figure).isFirstStep = false;
+                } else if (figure.getName() == "R" && ((Rook) figure).isFirstStep) {
+                    ((Rook) figure).isFirstStep = false;
+                }
                 return separator; // успешный ход
+            }
         }
     }
 
