@@ -2,6 +2,7 @@ package lab_03_chess.Figures;
 
 public class Rook extends Figure {
     // rook - ладья
+    public boolean isFirstStep = true;
 
     public Rook(char color) {
         super("r", color);

@@ -23,10 +23,6 @@ public class Main {
                 break;
             }
 
-//            System.out.println("Управление: ");
-//            System.out.println("Ход фигуры из клетки (row, col) в (row1, col1)");
-//            System.out.println("> row col row1 col1");
-
             switch (board.getColorGame()) {
                 case 'w':
                     System.out.println("Ход белых");
