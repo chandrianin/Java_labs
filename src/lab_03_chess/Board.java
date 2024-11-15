@@ -12,19 +12,19 @@ public class Board {
     /**
      * Массив всех возможных состояний игры для вывода в консоль
      */
-    public String[] textToOut = {"Мат", "Шах Королю!", "Допустимый ход!",
+    public final String[] textToOut = {"Мат", "Шах Королю!", "Допустимый ход!",
             "Измените ход!\nНельзя оставлять Короля под шахом", "Измените ход!", "Выберите свою фигуру!",
             "Измените ход!\nФигура не может пройти в требуемую клетку"};
 
     /**
      * Индекс, после которого в <i>textToOut</i> начинаются состояния ошибок хода
      */
-    public int separator = 2;
+    public final int separator = 2;
 
     /**
      * Индекс состояния <b>шах и мат</b>
      */
-    public int mate = 0;
+    public final int mate = 0;
 
 
     public void setColorGame(char _colorGame) {
@@ -134,7 +134,7 @@ public class Board {
                         textToOut[mate] = "Выиграли чёрные!";
                 }
                 return mate; // мат
-            } else if (_checkToKing(anotherColor)) {
+            } else if (_checkToKing(anotherColor)) { // проверяем, не поставлен ли ходом шах
                 return separator - 1;
             } else
                 return separator; // успешный ход
@@ -404,8 +404,7 @@ public class Board {
                 }
                 break;
             case "p": // первый ход пешки
-                if (((Pawn) figure).isFirstStep &&
-                        (Math.abs(row - row1) == 2) &&
+                if ((row == 1 && figure.getColor() == 'w' || row == 6 && figure.getColor() == 'b') && (Math.abs(row - row1) == 2) &&
                         (figure.getColor() == 'b' && _fields[row - 1][col] != null ||
                                 figure.getColor() == 'w' && _fields[row + 1][col] != null)) {
                     flag = false;
