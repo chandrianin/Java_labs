@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" fillWidth="false" maxHeight="230.0" maxWidth="230.0" minHeight="230.0" minWidth="230.0" prefHeight="230.0" prefWidth="230.0" style="-fx-background-color: #64c464;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.questGame.HelloController">
+    <HBox alignment="CENTER">
+        <VBox.margin>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+        </VBox.margin>
+        <Label contentDisplay="CENTER" prefHeight="20.0" text="Введите диапазон:" textFill="#213f21">
+           <font>
+               <Font name="Google Sans Regular" size="14.0" />
+           </font>
+           <HBox.margin>
+               <Insets />
+           </HBox.margin>
+        </Label>
+    </HBox>
+  <HBox alignment="CENTER" spacing="40.0">
+    <VBox.margin>
+      <Insets bottom="7.0" left="7.0" right="7.0" />
+    </VBox.margin>
+    <TextField fx:id="minValueField" alignment="CENTER" maxWidth="43.0" promptText="0" style="-fx-background-color: #3e723e; -fx-text-inner-color: #7af27a;">
+      <font>
+        <Font name="Google Sans Regular" size="12.0" />
+      </font>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+    </TextField>
+    <TextField fx:id="maxValueField" alignment="CENTER" maxWidth="43.0" promptText="100" style="-fx-background-color: #3e723e; -fx-text-inner-color: #7af27a;">
+      <font>
+        <Font name="Google Sans Regular" size="12.0" />
+      </font>
+      <HBox.margin>
+        <Insets />
+      </HBox.margin>
+    </TextField>
+  </HBox>
+    <HBox alignment="BASELINE_CENTER" spacing="15.0">
+        <VBox.margin>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+        </VBox.margin>
+        <Label text="Введите число:" textFill="#213f21">
+           <font>
+               <Font name="Google Sans Regular" size="14.0" />
+           </font>
+        </Label>
+        <TextField fx:id="targetValue" alignment="CENTER" editable="false" maxWidth="43.0" style="-fx-background-color: #3e723e; -fx-text-inner-color: #7af27a;">
+           <font>
+               <Font name="Google Sans Regular" size="14.0" />
+           </font>
+        </TextField>
+    </HBox>
+
+  <Label fx:id="statusText" maxHeight="45.0" maxWidth="150.0" minHeight="25.0" prefHeight="45.0" prefWidth="150.0" textAlignment="CENTER" textFill="#213f21" wrapText="true">
+      <VBox.margin>
+         <Insets />
+      </VBox.margin>
+      <font>
+         <Font name="Google Sans Regular" size="14.0" />
+      </font></Label>
+    <HBox alignment="CENTER" layoutX="72.0" layoutY="64.0" spacing="40.0">
+        <VBox.margin>
+            <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+        </VBox.margin>
+        <Button onAction="#onCheckButtonClick" style="-fx-background-color: #3e723e; -fx-text-fill: #7af27a;" text="Проверить">
+            <font>
+                <Font name="Google Sans Regular" size="12.0" />
+            </font>
+        </Button>
+    </HBox>
+   <Label text="Попыток: 0" textFill="#213f21" fx:id="countLabel">
+      <font>
+         <Font name="Google Sans Regular" size="12.0" />
+      </font>
+   </Label>
+</VBox>
